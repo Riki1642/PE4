@@ -1,0 +1,147 @@
+This is all the output of the terminal for a tie game.
+
+
+rileykirkham@engr2-3-114-dhcp ~ % cd Desktop 
+rileykirkham@engr2-3-114-dhcp Desktop % cd TicTacToe 
+rileykirkham@engr2-3-114-dhcp TicTacToe % make
+g++ -std=c++17 -Wall TicTacToe.cpp  -o main
+rileykirkham@engr2-3-114-dhcp TicTacToe % ./main 
+
+Player O
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+___
+___
+___
+
+Input: 1
+
+
+Player X
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+O__
+___
+___
+
+Input: 5
+
+
+Player O
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+O__
+_X_
+___
+
+Input: 3
+
+
+Player X
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+O_O
+_X_
+___
+
+Input: 2
+
+
+Player O
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+OXO
+_X_
+___
+
+Input: 8
+
+
+Player X
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+OXO
+_X_
+_O_
+
+Input: 4
+
+
+Player O
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+OXO
+XX_
+_O_
+
+Input: 6
+
+
+Player X
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+OXO
+XXO
+_O_
+
+Input: 9
+
+
+Player O
+
+Choose Where to play. Input Correspoinding number.
+
+123
+456
+789
+
+OXO
+XXO
+_OX
+
+Input: 7
+
+All Spaces Taken. Game is a draw.
+OXO
+XXO
+OOX
