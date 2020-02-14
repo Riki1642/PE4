@@ -17,6 +17,7 @@ int* CreateBoard(){
     return arr;
 }
 
+
 //Displays board with code 0 = _ , 1 = X, 2 = O.
 void DisplayBoard(int* table){
     for(int i = 0; i < 9; i ++){
