@@ -44,6 +44,7 @@ void DisplayBoard(int* table){
     }
 }
 
+
 //Prints the board that shows number locations (1-9 grid).
 void PrintLocationBoard(){
     for(int i = 1; i < 10; i++){
@@ -92,6 +93,14 @@ int GetPlayerChoice(int* table){
 
 
 
+void PlaceMarker(int location, int marker, int* table){
+    if(marker != 0 && marker != 1 && marker != 2){
+        std::cout <<"Error. Incorrect marker value"<<std::endl;
+    }
+    else{
+        table[location] = marker;
+    }
+}
 
 int main(){
 	int* table = CreateBoard();
