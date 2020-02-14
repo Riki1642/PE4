@@ -44,6 +44,16 @@ void DisplayBoard(int* table){
     }
 }
 
+void PlaceMarker(int location, int marker, int* table){
+    if(marker != 0 && marker != 1 && marker != 2){
+        std::cout <<"Error. Incorrect marker value"<<std::endl;
+    }
+    else{
+        table[location] = marker;
+    }
+}
+
+
 int main(){
 	int* table = CreateBoard();
 }
