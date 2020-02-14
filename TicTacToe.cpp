@@ -102,6 +102,118 @@ void PlaceMarker(int location, int marker, int* table){
     }
 }
 
+
+bool IsGameOver(int* Table){
+    int temp;
+    bool same = true;
+    //Test verical rows for winner.
+    for(int col = 0; col < 3; col++){
+        temp = Table[col]; //Set temp to first element for comparing.
+        if(temp == 0){
+            //If a temp is 0, then the player hasn't won in this column so we can skip.
+            continue;
+        }
+        for(int y = 0; y < 3; y++){
+            //For each vertical element in that column.
+            if(Table[col + 3*y] != temp){
+                //Element is different from top of col - no winner in this col.
+                same = false;
+                break;
+            }
+        }
+        if(same){
+            //Winner Declared
+            std::cout<<"Winner in vertical row!"<<std::endl;
+            return true;
+        }
+    }
+    //Test horizontal rows for winner.
+    for(int row = 0; row < 3; row++){
+        same = true;
+        temp = Table[3*row];
+        if(temp == 0){
+            continue;
+        }
+        for(int x = 0; x < 3; x++){     
+            if(Table[3*row + x] != temp){
+                same = false;
+                break;
+            }
+        }
+        if(same){
+            //Winner Declared
+            std::cout<<"Winner in horizontal row!"<<std::endl;
+            return true;
+        }
+    }
+
+    //Test Downward Right diagonal line
+    temp = Table[0];
+    if(temp != 0){
+        //If Temp = 0, this line is not a winner so we can skip.
+        //If it is not 0, we have to test to see if there is a winner.
+        same = true;
+        for(int i = 0; i < 3; i++){
+            if(Table[3*i + i] != temp){
+                same = false; 
+            }
+        }
+        if(same == true){
+            //Winner Declared
+            std::cout<<"Winner in Downward Right Diagonal!"<<std::endl;
+            return true;
+        }
+    }
+    //Test Upward Left diagonal line
+    temp = Table[2];
+    if(temp != 0){
+        same = true;
+        int j = 0;
+        for(int i = 2; i >= 0; i--){
+            if(Table[3*i + j] != temp){
+                same = false;
+            }
+            j++;
+                
+        }
+        if(same == true){
+            //Winner Declared
+            std::cout<<"Winner in Upward Left Diagonal!"<<std::endl;
+            return true;
+        }
+    }
+
+
+    for(int i = 0; i < 9; i++){
+        if(Table[i] == 0){
+            return false;
+        }
+        else{
+            continue;
+        }
+    }
+    std::cout<<"All Spaces Taken. Game is a draw.";
+    return true;
+}
+
 int main(){
-	int* table = CreateBoard();
+    int* table =  CreateBoard();
+    int turncount = 0;
+    int turnmarker = -1;
+    while(!IsGameOver(table)){
+        turncount++;
+        std::cout<<std::endl;
+        if(turncount % 2 == 0){
+            std::cout<<"Player X"<<std::endl;
+            turnmarker = 1;
+        }
+        else{
+            std::cout<<"Player O"<<std::endl;
+            turnmarker = 2;
+        }
+        int choice = GetPlayerChoice(table);
+       PlaceMarker(choice, turnmarker, table);
+    }
+    std::cout<<std::endl;
+    DisplayBoard(table);
 }
