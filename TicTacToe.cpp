@@ -1,6 +1,15 @@
+/*Riley Kirkham
+PE4
+This program will let the user play tictactoe against a friend!*/
+
 #include <iostream>
 
-//A nicer looking way to implement std::endls.
+/**
+    A simpler method of inserting std::endls throughout my code.
+
+    @param num The number of std::endls required.
+    @return void.
+*/
 void InsertLines(int num){
     for(int i = 0; i < num; i++){
         std::cout<<std::endl;
@@ -8,7 +17,12 @@ void InsertLines(int num){
 }
 
 
-//Initializes 3x3 board of 0s.
+/**
+    Creates a "board" - which is actually an array of 0s.
+
+    @param none
+    @return The array.
+*/
 int* CreateBoard(){
     int* arr = new int[9];
     for(int i = 0; i < 9; i++){
@@ -18,7 +32,12 @@ int* CreateBoard(){
 }
 
 
-//Displays board with code 0 = _ , 1 = X, 2 = O.
+/**
+    Translates an array of 0s,1s, and 2s into "_"s "X"s and "O"s.
+
+    @param table The array that holds game info.
+    @return void.
+*/
 void DisplayBoard(int* table){
     for(int i = 0; i < 9; i ++){
         switch (table[i])
@@ -45,7 +64,13 @@ void DisplayBoard(int* table){
 }
 
 
-//Prints the board that shows number locations (1-9 grid).
+/**
+    Simply Prints the coordinate board so the player knows what they must
+    input in oder to place their marker in the desired location.
+
+    @param none
+    @return none
+*/
 void PrintLocationBoard(){
     for(int i = 1; i < 10; i++){
         std::cout<<i;
@@ -56,7 +81,13 @@ void PrintLocationBoard(){
 }
 
 
-//Gets the location the player wants to place thier mark.
+/**
+    Gets the location where the player wants to put their marker and checks
+    to make sure it is a valid location.
+
+    @param table The array that holds all of the game information.
+    @return The player's location choice.
+*/
 int GetPlayerChoice(int* table){
     int choice = -1;
     InsertLines(1);
@@ -92,7 +123,14 @@ int GetPlayerChoice(int* table){
 }
 
 
+/**
+    Changes the array to have the current player's marker in their desired location.
 
+    @param location The location the player wants to place their marker.
+    @param marker The specific marker for the player (X or O)
+    @param table The array that holds all of the game information.
+    @return void.
+*/
 void PlaceMarker(int location, int marker, int* table){
     if(marker != 0 && marker != 1 && marker != 2){
         std::cout <<"Error. Incorrect marker value"<<std::endl;
@@ -102,20 +140,25 @@ void PlaceMarker(int location, int marker, int* table){
     }
 }
 
+/**
+    Checks to see if the game has been won or if there is a tie.
 
-bool IsGameOver(int* Table){
+    @param table The array that holds all of the game information.
+    @return True/False if the game is over.
+*/
+bool IsGameOver(int* table){
     int temp;
     bool same = true;
     //Test verical rows for winner.
     for(int col = 0; col < 3; col++){
-        temp = Table[col]; //Set temp to first element for comparing.
+        temp = table[col]; //Set temp to first element for comparing.
         if(temp == 0){
             //If a temp is 0, then the player hasn't won in this column so we can skip.
             continue;
         }
         for(int y = 0; y < 3; y++){
             //For each vertical element in that column.
-            if(Table[col + 3*y] != temp){
+            if(table[col + 3*y] != temp){
                 //Element is different from top of col - no winner in this col.
                 same = false;
                 break;
@@ -130,12 +173,12 @@ bool IsGameOver(int* Table){
     //Test horizontal rows for winner.
     for(int row = 0; row < 3; row++){
         same = true;
-        temp = Table[3*row];
+        temp = table[3*row];
         if(temp == 0){
             continue;
         }
         for(int x = 0; x < 3; x++){     
-            if(Table[3*row + x] != temp){
+            if(table[3*row + x] != temp){
                 same = false;
                 break;
             }
@@ -148,13 +191,13 @@ bool IsGameOver(int* Table){
     }
 
     //Test Downward Right diagonal line
-    temp = Table[0];
+    temp = table[0];
     if(temp != 0){
         //If Temp = 0, this line is not a winner so we can skip.
         //If it is not 0, we have to test to see if there is a winner.
         same = true;
         for(int i = 0; i < 3; i++){
-            if(Table[3*i + i] != temp){
+            if(table[3*i + i] != temp){
                 same = false; 
             }
         }
@@ -165,12 +208,12 @@ bool IsGameOver(int* Table){
         }
     }
     //Test Upward Left diagonal line
-    temp = Table[2];
+    temp = table[2];
     if(temp != 0){
         same = true;
         int j = 0;
         for(int i = 2; i >= 0; i--){
-            if(Table[3*i + j] != temp){
+            if(table[3*i + j] != temp){
                 same = false;
             }
             j++;
@@ -183,9 +226,9 @@ bool IsGameOver(int* Table){
         }
     }
 
-
+// Check if the entire board is full - which would result in a tie game.
     for(int i = 0; i < 9; i++){
-        if(Table[i] == 0){
+        if(table[i] == 0){
             return false;
         }
         else{
@@ -198,21 +241,21 @@ bool IsGameOver(int* Table){
 
 int main(){
     int* table =  CreateBoard();
-    int turncount = 0;
-    int turnmarker = -1;
+    int turn_count = 0;
+    int turn_marker = -1;
     while(!IsGameOver(table)){
-        turncount++;
+        turn_count++;
         std::cout<<std::endl;
-        if(turncount % 2 == 0){
+        if(turn_count % 2 == 0){
             std::cout<<"Player X"<<std::endl;
-            turnmarker = 1;
+            turn_marker = 1;
         }
         else{
             std::cout<<"Player O"<<std::endl;
-            turnmarker = 2;
+            turn_marker = 2;
         }
         int choice = GetPlayerChoice(table);
-       PlaceMarker(choice, turnmarker, table);
+       PlaceMarker(choice, turn_marker, table);
     }
     std::cout<<std::endl;
     DisplayBoard(table);
